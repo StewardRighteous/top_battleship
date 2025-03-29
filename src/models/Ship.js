@@ -7,8 +7,22 @@ Object.freeze(Orientation);
 export default class Ship {
   length;
   noOfTimesHit = 0;
-  startPosition;
   orientation;
+  positions = [];
+  startPosition;
+
+  set startPos(start) {
+    this.startPosition = start;
+    let row = start.at(0);
+    let col = start.at(1);
+    for (let i = 1; i <= this.length; i++) {
+      let coordinate =
+        this.orientation == Orientation.horizontal
+          ? `${row}${col++}`
+          : `${row++}${col}`;
+      this.positions.push(coordinate);
+    }
+  }
 
   constructor(length) {
     this.length = length;
@@ -25,4 +39,6 @@ export default class Ship {
     }
     return false;
   }
+
+  setShipAtStartPosition() {}
 }
