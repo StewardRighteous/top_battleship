@@ -17,8 +17,11 @@ export default class GameBoard {
   }
 
   // TODO: Place Ships
-  placeShips(size, coordinate) {
+  placeShips(size, coordinate, orientation) {
     let newShip = new Ship(size);
+    if (orientation) {
+      newShip.orient = orientation;
+    }
     newShip.startPos = coordinate;
     this.ships.push(newShip);
   }

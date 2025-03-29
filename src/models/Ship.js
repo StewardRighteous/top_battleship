@@ -1,8 +1,4 @@
-const Orientation = {
-  vertical: "V",
-  horizontal: "H",
-};
-Object.freeze(Orientation);
+import Orientation from "./Orientation";
 
 export default class Ship {
   length;
@@ -10,6 +6,11 @@ export default class Ship {
   orientation;
   positions = [];
   startPosition;
+
+  constructor(length) {
+    this.length = length;
+    this.orientation = Orientation.horizontal;
+  }
 
   set startPos(start) {
     this.startPosition = start;
@@ -24,9 +25,8 @@ export default class Ship {
     }
   }
 
-  constructor(length) {
-    this.length = length;
-    this.orientation = Orientation.horizontal;
+  set orient(or){
+    this.orientation = or;
   }
 
   hit() {
