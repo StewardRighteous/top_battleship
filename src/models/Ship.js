@@ -1,9 +1,18 @@
+const Orientation = {
+  vertical: "V",
+  horizontal: "H",
+};
+Object.freeze(Orientation);
+
 export default class Ship {
   length;
   noOfTimesHit = 0;
+  startPosition;
+  orientation;
 
   constructor(length) {
     this.length = length;
+    this.orientation = Orientation.horizontal;
   }
 
   hit() {
