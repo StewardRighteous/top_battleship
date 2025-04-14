@@ -95,7 +95,16 @@ export default class GameBoard {
     });
   }
 
-  // TODO: Receive attacks
-  // TODO: Attacks needs to be tracked (Even for missed)
+  receiveAttack(coord){
+    const row = Number(coord.at(0));
+    const col = Number(coord.at(1));
+    this.gameBoard[row][col] = "miss";
+    this.ships.forEach((ship)=>{
+      if(ship.positions.includes(coord)){
+        ship.hit();
+        this.gameBoard[row][col] = "hit";
+      }
+    })
+  }
   // TODO: Whether all ships are sunk or not
 }

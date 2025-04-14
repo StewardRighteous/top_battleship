@@ -3,7 +3,7 @@ import GameBoard from "../../src/models/Gameboard";
 import Orientation from "../../src/models/Orientation";
 
 test("gameboard is created with right coordinates", () => {
-  let gameboard = new GameBoard();
+  const gameboard = new GameBoard();
   const testCases = [
     { i: 0, j: 0, expect: "00" },
     { i: 5, j: 4, expect: "54" },
@@ -15,7 +15,7 @@ test("gameboard is created with right coordinates", () => {
 });
 
 test("generate ship with size and position coordinate", () => {
-  let gameboard = new GameBoard();
+  const gameboard = new GameBoard();
   const testCases = [
     {
       index: 0,
@@ -47,7 +47,7 @@ test("generate ship with size and position coordinate", () => {
 });
 
 test("create ship with various orientation (Vertical and Horizontal)", () => {
-  let gameBoard = new GameBoard();
+  const gameBoard = new GameBoard();
   const testCases = [
     {
       index: 0,
@@ -80,7 +80,7 @@ test("create ship with various orientation (Vertical and Horizontal)", () => {
 });
 
 test("ship should not go out of board", () => {
-  let gameBoard = new GameBoard();
+  const gameBoard = new GameBoard();
   const testCases = [
     { shipSize: 5, start: "99", orient: Orientation.horizontal, output: false },
     { shipSize: 4, start: "88", orient: Orientation.vertical, output: false },
@@ -98,7 +98,7 @@ test("ship should not go out of board", () => {
 });
 
 test("ships should not overlap and remove the last ship that overlapped", () => {
-  let gameBoard = new GameBoard();
+  const gameBoard = new GameBoard();
   const placeShipsOrder = [
     { size: 5, coord: "00" },
     { size: 5, coord: "01" },
@@ -113,7 +113,7 @@ test("ships should not overlap and remove the last ship that overlapped", () => 
 });
 
 test("ships are placed randomly with no overlap", () => {
-  let gameBoard = new GameBoard();
+  const gameBoard = new GameBoard();
   gameBoard.placeShipsRandomly();
   gameBoard.ships.forEach((ship) => {
     expect(ship.positions.length).toEqual(ship.length);
@@ -126,4 +126,27 @@ test("ships are placed randomly with no overlap", () => {
     (item, index) => allPositions.indexOf(item) !== index,
   );
   expect(duplicates.length).toEqual(0);
+});
+
+test("Receive attack", () => {
+  const gameBoard = new GameBoard();
+  gameBoard.placeShips(5, "00", Orientation.horizontal); //00, 01, 02, 03, 04
+  gameBoard.placeShips(4, "10", Orientation.vertical); //10, 20, 30, 40
+  gameBoard.placeShips(5, "84", Orientation.horizontal); // 84, 85, 86, 87, 88
+  const testcases = [
+    { coord: "00", stat: "hit", times: 1, shipIndex: 0 },
+    { coord: "81", stat: "miss", times: 1 },
+    { coord: "88", stat: "hit", times: 1, shipIndex: 2 },
+    { coord: "87", stat: "hit", times: 2, shipIndex: 2 },
+  ];
+  testcases.forEach((test) => {
+    gameBoard.receiveAttack(test.coord);
+    expect(
+      gameBoard.gameBoard[Number(test.coord.at(0))][Number(test.coord.at(1))],
+    ).toMatch(test.stat);
+    if (test.shipIndex) {
+      expect(gameBoard.ships[test.shipIndex].noOfTimesHit).toEqual(test.times);
+    }
+  });
+  expect(gameBoard.ships[0].noOfTimesHit).toEqual(1);
 });
