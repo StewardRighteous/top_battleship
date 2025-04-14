@@ -150,3 +150,16 @@ test("Receive attack", () => {
   });
   expect(gameBoard.ships[0].noOfTimesHit).toEqual(1);
 });
+
+test("Does all ships sunk", () => {
+  const gameBoard = new GameBoard();
+  gameBoard.placeShips(5, "00");
+  gameBoard.placeShips(4, "10", Orientation.vertical);
+  const attacks = ["00", "01", "10", "02", "20", "03", "55", "04", "30", "40"];
+  for (let i = 0; i < attacks.length - 1; i++) {
+    gameBoard.receiveAttack(attacks[i]);
+    expect(gameBoard.isAllSunk()).toBeFalsy();
+  }
+  gameBoard.receiveAttack(attacks.at(-1));
+  expect(gameBoard.isAllSunk()).toBeTruthy();
+});

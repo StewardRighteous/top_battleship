@@ -91,20 +91,32 @@ export default class GameBoard {
         let coord = this.generateRandomCoordinate(size, orient);
         this.placeShips(size, coord, orient);
         this.removeOverlapping();
-      } while (this.ships.length != noOfShipsPlaced+1);
+      } while (this.ships.length != noOfShipsPlaced + 1);
     });
   }
 
-  receiveAttack(coord){
+  receiveAttack(coord) {
     const row = Number(coord.at(0));
     const col = Number(coord.at(1));
     this.gameBoard[row][col] = "miss";
-    this.ships.forEach((ship)=>{
-      if(ship.positions.includes(coord)){
+    this.ships.forEach((ship) => {
+      if (ship.positions.includes(coord)) {
         ship.hit();
         this.gameBoard[row][col] = "hit";
       }
-    })
+    });
   }
-  // TODO: Whether all ships are sunk or not
+
+  isAllSunk() {
+    let allSunk = false;
+    const status = [];
+    this.ships.forEach((ship) => {
+      const sunk = ship.isSunk();
+      status.push(sunk);
+    });
+    if (!status.includes(false)) {
+      allSunk = true;
+    }
+    return allSunk;
+  }
 }
