@@ -96,3 +96,26 @@ test("ship should not go out of board", () => {
     ).toBe(test.output);
   });
 });
+
+test("ships are placed randomly", () => {
+  let gameBoard = new GameBoard();
+  gameBoard.placeShipsRandomly();
+  gameBoard.ships.forEach((ship) => {
+    expect(ship.positions.length).toEqual(ship.length);
+  });
+});
+
+test("ships should not overlap", () => {
+  let gameBoard = new GameBoard();
+  let placeShipsOrder = [
+    { size: 5, coord: "00"}, // 00, 01, 02, 03, 04
+    { size: 5, coord: "01" }, // 01, 02, 03, 04, 05
+    { size: 4, coord: "20", orient: Orientation.vertical }, //01, 11, 12, 13 
+    { size: 4, coord: "03", orient: Orientation.vertical }, //03, 13, 23, 33
+  ];
+  placeShipsOrder.forEach((ship) => {
+    gameBoard.placeShips(ship.size, ship.coord, ship.orient);
+    gameBoard.removeOverlapping();
+  });
+  expect(gameBoard.ships.length).toEqual(2);
+});
