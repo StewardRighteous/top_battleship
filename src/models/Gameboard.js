@@ -8,7 +8,7 @@ export default class GameBoard {
 
   constructor() {
     for (let row = 0; row <= 9; row++) {
-      let rowCoordinates = [];
+      const rowCoordinates = [];
       for (let column = 0; column <= 9; column++) {
         let coordinate = `${row}${column}`;
         rowCoordinates.push(coordinate);
@@ -46,7 +46,7 @@ export default class GameBoard {
 
   isOverlapping() {
     if (this.ships.length > 1) {
-      let allShipCoordinates = [];
+      const allShipCoordinates = [];
       for (let i = 0; i < this.ships.length - 1; i++) {
         allShipCoordinates.push(...this.ships[i].positions);
       }
@@ -67,20 +67,31 @@ export default class GameBoard {
     }
   }
 
-  // TODO: Put all ships in random locations , it should not be out of board, it should not overlap with other
+  generateRandomOrientation() {
+    return Math.floor(Math.random() * 2) == 1
+      ? Orientation.vertical
+      : Orientation.horizontal;
+  }
+
+  generateRandomCoordinate(size, orient) {
+    let coord;
+    do {
+      let row = Math.floor(Math.random() * 10);
+      let col = Math.floor(Math.random() * 10);
+      coord = String(row) + String(col);
+    } while (!this.isInsideBoard(size, coord, orient));
+    return coord;
+  }
+
   placeShipsRandomly() {
     this.shipSizes.forEach((size) => {
-      let orient =
-        Math.floor(Math.random() * 2) == 1
-          ? Orientation.vertical
-          : Orientation.horizontal;
-      let coord;
+      let orient = this.generateRandomOrientation();
+      let noOfShipsPlaced = this.ships.length;
       do {
-        let row = Math.floor(Math.random() * 10);
-        let col = Math.floor(Math.random() * 10);
-        coord = String(row) + String(col);
-      } while (!this.isInsideBoard(size, coord, orient));
-      this.placeShips(size, coord, orient);
+        let coord = this.generateRandomCoordinate(size, orient);
+        this.placeShips(size, coord, orient);
+        this.removeOverlapping();
+      } while (this.ships.length != noOfShipsPlaced+1);
     });
   }
 
