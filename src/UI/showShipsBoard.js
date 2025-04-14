@@ -1,4 +1,7 @@
 export default function showShipsBoard(playerBoard, UIboard) {
+  while (UIboard.firstChild) {
+    UIboard.removeChild(UIboard.firstChild);
+  }
   for (let row = 0; row <= 9; row++) {
     for (let col = 0; col <= 9; col++) {
       const cell = document.createElement("div");

@@ -107,6 +107,10 @@ export default class GameBoard {
     });
   }
 
+  removeAllShips() {
+    this.ships = [];
+  }
+
   isAllSunk() {
     let allSunk = false;
     const status = [];

@@ -20,7 +20,7 @@ export default function startGame() {
   showShipsBoard(game.player1.playerBoard, playerBoard1);
 
   function newGame(player2 = "computer") {
-    if(player2!= "computer"){
+    if (player2 != "computer") {
       game.opponent = player2;
     }
     game.player2.playerBoard.placeShipsRandomly();
@@ -45,6 +45,12 @@ export default function startGame() {
   });
 
   resetButton.addEventListener("click", () => {
-    // TODO: Reset Game
+    window.location.reload();
+  });
+
+  randomizeButton.addEventListener("click", () => {
+    game.player1.playerBoard.removeAllShips();
+    game.player1.playerBoard.placeShipsRandomly();
+    showShipsBoard(game.player1.playerBoard, playerBoard1)
   });
 }
