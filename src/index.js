@@ -1,3 +1,6 @@
-import "./css/style.css"
+import "./css/style.css";
+import {startGame} from "./UI/barrel";
 
-console.log("running");
+startGame();
+
+
