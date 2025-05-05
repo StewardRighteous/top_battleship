@@ -73,7 +73,7 @@ export default class GameManager {
       return this.gameBoard2.isAllSunk();
     }
     if (this.player2turn) {
-      return this.gameBoard2.isAllSunk();
+      return this.gameBoard1.isAllSunk();
     }
   }
 }
