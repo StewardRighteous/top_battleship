@@ -1,6 +1,6 @@
-import { Player } from "./../models/barrel";
+import { Player } from "../models/barrel";
 
-export default class Game {
+export default class GameManager {
   player1;
   player2;
 

@@ -1,3 +1,3 @@
-import Game from "./Game";
+import GameManager from "./Game";
 
-export { Game };
+export { GameManager };
