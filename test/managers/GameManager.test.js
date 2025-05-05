@@ -81,9 +81,27 @@ test("check for game over", () => {
   game.setBoardWithUserValue("player1", ships);
   game.setBoardWithUserValue("player2", ships);
   expect(game.isGameOver()).toBeFalsy();
-  const hits = ["00","50", "01", "00" ];
+  const hits = ["00", "50", "01", "00"];
   hits.forEach((coord) => {
     game.hitBoard(coord);
   });
   expect(game.isGameOver()).toBeTruthy();
+});
+
+test("get winner", () => {
+  const game = new GameManager();
+  game.setPlayer2();
+  game.setTurn();
+  const ships = [{ size: 2, coord: "00", or: Orientation.horizontal }];
+  game.setBoardWithUserValue("player1", ships);
+  game.setBoardWithUserValue("player2", ships);
+  const hits = ["00", "50", "01", "00"];
+  hits.forEach((coord) => {
+    game.hitBoard(coord);
+    if (game.isGameOver()) {
+      expect(game.fetchWinner()).toBe("player2");
+    } else {
+      expect(game.fetchWinner()).toBeUndefined();
+    }
+  });
 });

@@ -7,6 +7,7 @@ export default class GameManager {
   gameBoard2;
   player1turn = false;
   player2turn = false;
+  winner;
 
   constructor() {
     this.player1 = new Player("player1");
@@ -70,10 +71,22 @@ export default class GameManager {
 
   isGameOver() {
     if (this.player1turn) {
-      return this.gameBoard2.isAllSunk();
+      const sunk = this.gameBoard2.isAllSunk();
+      if(sunk){
+        this.winner = this.player1.playerName;
+      }
+      return sunk;
     }
     if (this.player2turn) {
-      return this.gameBoard1.isAllSunk();
+      const sunk = this.gameBoard1.isAllSunk();
+      if(sunk){
+        this.winner = this.player2.playerName;
+      }
+      return sunk;
     }
+  }
+
+  fetchWinner(){
+    return this.winner;
   }
 }
