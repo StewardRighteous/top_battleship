@@ -56,15 +56,24 @@ export default class GameManager {
     let row = coord.at(0);
     let col = coord.at(1);
     if (this.player1turn) {
+      this.gameBoard2.receiveAttack(coord);
+      if (this.gameBoard2.gameBoard[row][col] == "miss") {
+        this.setTurn();
+      }
+    } else {
       this.gameBoard1.receiveAttack(coord);
       if (this.gameBoard1.gameBoard[row][col] == "miss") {
         this.setTurn();
       }
-    } else {
-      this.gameBoard2.receiveAttack(coord);
-      if (this.gameBoard1.gameBoard[row][col] == "miss") {
-        this.setTurn();
-      }
+    }
+  }
+
+  isGameOver() {
+    if (this.player1turn) {
+      return this.gameBoard2.isAllSunk();
+    }
+    if (this.player2turn) {
+      return this.gameBoard2.isAllSunk();
     }
   }
 }

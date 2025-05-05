@@ -65,10 +65,25 @@ test("hit the board", () => {
   testAttacks.forEach((coord) => {
     game.hitBoard(coord);
   });
-  expect(game.gameBoard1.gameBoard[0][1]).toBe("hit");
-  expect(game.gameBoard1.gameBoard[5][1]).toBe("hit");
-  expect(game.gameBoard1.gameBoard[0][0]).toBe("miss"); // board changes when missed
-  expect(game.gameBoard2.gameBoard[2][6]).toBe("hit");
-  expect(game.gameBoard2.gameBoard[2][5]).toBe("hit");
-  expect(game.gameBoard2.gameBoard[0][0]).toBe("miss");
+  expect(game.gameBoard2.gameBoard[0][1]).toBe("hit");
+  expect(game.gameBoard2.gameBoard[5][1]).toBe("hit");
+  expect(game.gameBoard2.gameBoard[0][0]).toBe("miss"); // board changes when missed
+  expect(game.gameBoard1.gameBoard[2][6]).toBe("hit");
+  expect(game.gameBoard1.gameBoard[2][5]).toBe("hit");
+  expect(game.gameBoard1.gameBoard[0][0]).toBe("miss");
+});
+
+test("check for game over", () => {
+  const game = new GameManager();
+  game.setPlayer2();
+  game.setTurn();
+  const ships = [{ size: 2, coord: "00", or: Orientation.horizontal }];
+  game.setBoardWithUserValue("player1", ships);
+  game.setBoardWithUserValue("player2", ships);
+  expect(game.isGameOver()).toBeFalsy();
+  const hits = ["00","50", "01", "00" ];
+  hits.forEach((coord) => {
+    game.hitBoard(coord);
+  });
+  expect(game.isGameOver()).toBeTruthy();
 });
