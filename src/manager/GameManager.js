@@ -72,21 +72,31 @@ export default class GameManager {
   isGameOver() {
     if (this.player1turn) {
       const sunk = this.gameBoard2.isAllSunk();
-      if(sunk){
+      if (sunk) {
         this.winner = this.player1.playerName;
       }
       return sunk;
     }
     if (this.player2turn) {
       const sunk = this.gameBoard1.isAllSunk();
-      if(sunk){
+      if (sunk) {
         this.winner = this.player2.playerName;
       }
       return sunk;
     }
   }
 
-  fetchWinner(){
+  fetchWinner() {
     return this.winner;
+  }
+
+  newGame() {
+    this.player1 = new Player(this.player1.playerName);
+    this.player2 = new Player(this.player2.playerName);
+    this.gameBoard1 = this.player1.playerBoard;
+    this.gameBoard2 = this.player2.playerBoard;
+    this.player1turn = false;
+    this.player2turn = false;
+    this.winner = undefined;
   }
 }
