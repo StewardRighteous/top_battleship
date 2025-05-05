@@ -51,4 +51,20 @@ export default class GameManager {
       });
     }
   }
+
+  hitBoard(coord) {
+    let row = coord.at(0);
+    let col = coord.at(1);
+    if (this.player1turn) {
+      this.gameBoard1.receiveAttack(coord);
+      if (this.gameBoard1.gameBoard[row][col] == "miss") {
+        this.setTurn();
+      }
+    } else {
+      this.gameBoard2.receiveAttack(coord);
+      if (this.gameBoard1.gameBoard[row][col] == "miss") {
+        this.setTurn();
+      }
+    }
+  }
 }
