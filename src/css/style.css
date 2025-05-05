@@ -152,7 +152,7 @@ body {
     padding: 8px;
     border: 2px solid white;
     color: white;
-    display: none;
+    display: flex;
 }
 
 .choose-player button{

@@ -1,6 +1,6 @@
 import { Player } from "../models/barrel";
 
-export default class GameManager {
+class GameManager {
   player1;
   player2;
   gameBoard1;
@@ -100,3 +100,5 @@ export default class GameManager {
     this.winner = undefined;
   }
 }
+
+export default new GameManager();

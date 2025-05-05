@@ -1,3 +1,4 @@
-import GameManager from "./GameManager.js";
+import GameManager from "./GameManager";
+import UIManager from "./UIManager";
 
-export { GameManager };
+export { GameManager, UIManager };
