@@ -31,4 +31,24 @@ export default class GameManager {
       this.player2turn = false;
     }
   }
+
+  setBoardRandomly() {
+    this.gameBoard1.placeShipsRandomly();
+    this.gameBoard2.placeShipsRandomly();
+  }
+
+  setBoardWithUserValue(playerName, ships) {
+    if (playerName == this.player1.playerName) {
+      this.gameBoard1.removeAllShips();
+      ships.forEach((ship) => {
+        this.gameBoard1.placeShips(ship.size, ship.coord, ship.or);
+      });
+    }
+    if (playerName == this.player2.playerName) {
+      this.gameBoard2.removeAllShips();
+      ships.forEach((ship) => {
+        this.gameBoard2.placeShips(ship.size, ship.coord, ship.or);
+      });
+    }
+  }
 }
