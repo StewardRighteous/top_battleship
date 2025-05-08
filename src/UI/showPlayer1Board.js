@@ -1,10 +1,16 @@
 import { GameManager, UIManager } from "./../manager/barrel";
-import { playerBoard1 } from "./UIcomponents";
+import { playerBoard1, playerBoard2, choosePlayerDialog } from "./UIcomponents";
 
 export default function showPlayer1Board() {
   while (playerBoard1.firstChild) {
     playerBoard1.removeChild(playerBoard1.firstChild);
   }
+
+  while (playerBoard2.children.length > 1) {
+    playerBoard2.removeChild(playerBoard2.lastChild);
+  }
+  choosePlayerDialog.style.display = "flex";
+
   const userBoard = GameManager.gameBoard1.gameBoard;
   const ships = GameManager.gameBoard1.ships;
   const shipCoords = [];

@@ -8,6 +8,7 @@ const choosePlayerDialog = document.querySelector(".choose-player");
 const playComputerButton = document.querySelector(".play-computer");
 const playPlayerButton = document.querySelector(".play-player2");
 const arrangeButton = document.querySelector(".arrange-button");
+const settingsMenu = document.querySelector(".settings");
 
 export {
   commandText,
@@ -20,4 +21,5 @@ export {
   playComputerButton,
   playPlayerButton,
   arrangeButton,
+  settingsMenu
 };

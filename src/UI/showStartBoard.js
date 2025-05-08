@@ -4,8 +4,9 @@ import {
   randomizeButton,
   playComputerButton,
   playPlayerButton,
+  arrangeButton,
 } from "./UIcomponents";
-import {showPlayer1Board} from "./barrel"
+import {showPlayer1Board, arrangeBoard} from "./barrel"
 
 export default function showStartBoard() {
 
@@ -24,6 +25,10 @@ export default function showStartBoard() {
     GameManager.gameBoard1.removeAllShips();
     GameManager.gameBoard1.placeShipsRandomly();
     UIManager.notify();
+  });
+
+  arrangeButton.addEventListener("click", ()=>{
+    arrangeBoard("player1");
   });
 }
 
