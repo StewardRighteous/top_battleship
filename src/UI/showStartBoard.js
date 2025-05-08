@@ -11,6 +11,7 @@ import {showPlayer1Board, arrangeBoard} from "./barrel"
 export default function showStartBoard() {
 
   GameManager.setBoardRandomly();
+  GameManager.setPlayer2();
   showPlayer1Board();
 
   startGameButton.addEventListener("click", () => {

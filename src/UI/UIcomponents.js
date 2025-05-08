@@ -9,6 +9,11 @@ const playComputerButton = document.querySelector(".play-computer");
 const playPlayerButton = document.querySelector(".play-player2");
 const arrangeButton = document.querySelector(".arrange-button");
 const settingsMenu = document.querySelector(".settings");
+const body = document.querySelector("body");
+const hideBoard = document.querySelector(".hide-container");
+const messageInHideBoard = hideBoard.querySelector(".message");
+const passButtonHideBoard = hideBoard.querySelector(".pass-button");
+const cancelButtonHIdeBoard = hideBoard.querySelector(".cancel-button");
 
 export {
   commandText,
@@ -21,5 +26,10 @@ export {
   playComputerButton,
   playPlayerButton,
   arrangeButton,
-  settingsMenu
+  settingsMenu,
+  body,
+  hideBoard,
+  messageInHideBoard,
+  passButtonHideBoard,
+  cancelButtonHIdeBoard
 };

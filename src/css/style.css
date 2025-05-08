@@ -192,3 +192,30 @@ body {
   width: 150px;
   font-weight: bold;
 }
+
+.hide-container{
+  position: fixed;
+  top: 196px;
+  left: 25px;
+  width: 1033px;
+  height: 530px;
+  background-color: rgb(41, 39, 39);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  gap: 5px;
+  display: none;
+}
+
+.hide-container button{
+  border: 2px solid black;
+  width: 100px;
+}
+
+.hide-container button:first-of-type{
+  background-color: green;
+  color: white;
+}

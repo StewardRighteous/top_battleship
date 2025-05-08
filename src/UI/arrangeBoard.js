@@ -10,6 +10,10 @@ import {
   arrangeButton,
   resetButton,
   settingsMenu,
+  hideBoard,
+  messageInHideBoard,
+  passButtonHideBoard,
+  cancelButtonHIdeBoard,
 } from "./UIcomponents";
 
 export default function arrangeBoard(player) {
@@ -238,16 +242,30 @@ export default function arrangeBoard(player) {
       });
       GameManager.setBoardWithUserValue(player, ships);
       if (player == "player1" && GameManager.player2.playerName != "computer") {
-        const isPlayer2 = confirm(
-          "Does Player 2 wants to Arrange Board?, If YES pass and click YES",
-        );
-        if (isPlayer2) {
+        hideBoard.style.display = "flex";
+        messageInHideBoard.textContent =
+          "Does Player 2 wants to Arrange Board?, Click YES to pass or Cancel it";
+        passButtonHideBoard.onclick = () => {
           resetSetting();
           arrangeBoard("player2");
-        }
+          hideBoard.style.display = "none";
+          cancelButtonHIdeBoard.style.display = "block";
+        };
+        cancelButtonHIdeBoard.onclick = () => {
+          resetSetting();
+          UIManager.notify();
+          hideBoard.style.display = "none";
+        };
       } else {
-        resetSetting();
-        UIManager.notify();
+        hideBoard.style.display = "flex";
+        messageInHideBoard.textContent =
+          "Pass to Player1, If you are player1 just click YES";
+        passButtonHideBoard.onclick = () => {
+          resetSetting();
+          UIManager.notify();
+          hideBoard.style.display = "none";
+        };
+        cancelButtonHIdeBoard.style.display = "none";
       }
     }
   });
