@@ -9,6 +9,7 @@ class GameManager {
   player2turn = false;
   winner;
   levelEasy = true;
+  lastHit;
 
   constructor() {
     this.player1 = new Player("player1");
@@ -122,8 +123,26 @@ class GameManager {
         }
       }
     }
-    let rand = Math.floor(Math.random() * options.length);
-    this.hitBoard(options[rand]);
+    if (this.levelEasy) {
+      let rand = Math.floor(Math.random() * options.length);
+      this.hitBoard(options[rand]);
+    } else {
+      if (this.lastHit != undefined) {
+        let newHit1 = `${this.lastHit.at(0)}${Number(this.lastHit.at(1)) + 1}`;
+        let newHit2 = `${Number(this.lastHit.at(0)) + 1}${Number(this.lastHit.at(1))}`;
+        if (options.includes(newHit1)) {
+          this.hitBoard(newHit1);
+        } else if (options.includes(newHit2)) {
+          this.hitBoard(newHit2);
+        }
+        this.lastHit = undefined;
+      } else {
+        let rand = Math.floor(Math.random() * options.length);
+        this.hitBoard(options[rand]);
+        const coord = options[rand];
+        this.lastHit = coord;
+      }
+    }
   }
 }
 
