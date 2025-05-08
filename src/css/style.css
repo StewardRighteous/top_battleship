@@ -196,8 +196,9 @@ body {
 .hide-container{
   position: fixed;
   top: 196px;
-  left: 25px;
-  width: 1033px;
+  left: 50px;
+  right: 50px;
+  width: 1800px;
   height: 530px;
   background-color: rgb(41, 39, 39);
   z-index: 1;
