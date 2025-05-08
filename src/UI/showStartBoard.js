@@ -12,7 +12,7 @@ import {
   gameCancelButton,
   resetButton,
 } from "./UIcomponents";
-import { showPlayer1Board, arrangeBoard, buildBoards } from "./barrel";
+import { showPlayer1Board, arrangeBoard, startGame } from "./barrel";
 
 export default function showStartBoard() {
   gameCancelButton.style.display = "none";
@@ -23,7 +23,7 @@ export default function showStartBoard() {
   startGameButton.addEventListener("click", () => {
     GameManager.setTurn();
     UIManager.unsubscribe(showPlayer1Board);
-    UIManager.subscribe(buildBoards);
+    UIManager.subscribe(startGame);
     UIManager.notify();
   });
 
