@@ -5,22 +5,48 @@ import {
   playComputerButton,
   playPlayerButton,
   arrangeButton,
+  hideBoard,
+  messageInHideBoard,
+  passButtonHideBoard,
+  cancelButtonHIdeBoard,
 } from "./UIcomponents";
-import {showPlayer1Board, arrangeBoard} from "./barrel"
+import { showPlayer1Board, arrangeBoard } from "./barrel";
 
 export default function showStartBoard() {
-
   GameManager.setBoardRandomly();
-  GameManager.setPlayer2();
   showPlayer1Board();
 
   startGameButton.addEventListener("click", () => {
     UIManager.unsubscribe(showPlayer1Board);
   });
 
-  playComputerButton.addEventListener("click", () => {});
+  playComputerButton.addEventListener("click", () => {
+    GameManager.setComputer();
+    hideBoard.style.display = "flex";
+    messageInHideBoard.textContent =
+      "Do you want the Computer to be Brilliant ?";
+    passButtonHideBoard.onclick = () => {
+      GameManager.isEasyLevel(false);
+      hideBoard.style.display = "none";
+    };
+    cancelButtonHIdeBoard.onclick = () => {
+      GameManager.isEasyLevel(true);
+      hideBoard.style.display = "none";
+    };
+  });
 
-  playPlayerButton.addEventListener("click", () => {});
+  playPlayerButton.addEventListener("click", () => {
+    GameManager.setPlayer2();
+    hideBoard.style.display = "flex";
+    messageInHideBoard.textContent = "Do you want to arrange your boards ?";
+    passButtonHideBoard.onclick = () => {
+      hideBoard.style.display = "none";
+      arrangeBoard("player1");
+    };
+    cancelButtonHIdeBoard.onclick = () => {
+      hideBoard.style.display = "none";
+    };
+  });
 
   randomizeButton.addEventListener("click", () => {
     GameManager.gameBoard1.removeAllShips();
@@ -28,9 +54,7 @@ export default function showStartBoard() {
     UIManager.notify();
   });
 
-  arrangeButton.addEventListener("click", ()=>{
+  arrangeButton.addEventListener("click", () => {
     arrangeBoard("player1");
   });
 }
-
-

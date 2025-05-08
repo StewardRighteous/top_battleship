@@ -8,6 +8,7 @@ class GameManager {
   player1turn = false;
   player2turn = false;
   winner;
+  levelEasy = true;
 
   constructor() {
     this.player1 = new Player("player1");
@@ -18,6 +19,14 @@ class GameManager {
 
   setPlayer2() {
     this.player2.playerName = "player2";
+  }
+
+  setComputer() {
+    this.player2.playerName = "computer";
+  }
+
+  isEasyLevel(level) {
+    this.levelEasy = level;
   }
 
   setTurn() {
