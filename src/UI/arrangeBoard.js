@@ -30,6 +30,9 @@ export default function arrangeBoard(player) {
     while (playerBoard1.firstChild) {
       playerBoard1.removeChild(playerBoard1.firstChild);
     }
+    while (playerBoard2.children.length > 1) {
+      playerBoard2.removeChild(playerBoard2.lastChild);
+    }
     choosePlayerDialog.style.display = "none";
   }
 
@@ -234,8 +237,18 @@ export default function arrangeBoard(player) {
         ships.push(shipDetail);
       });
       GameManager.setBoardWithUserValue(player, ships);
-      resetSetting();
-      UIManager.notify();
+      if (player == "player1" && GameManager.player2.playerName != "computer") {
+        const isPlayer2 = confirm(
+          "Does Player 2 wants to Arrange Board?, If YES pass and click YES",
+        );
+        if (isPlayer2) {
+          resetSetting();
+          arrangeBoard("player2");
+        }
+      } else {
+        resetSetting();
+        UIManager.notify();
+      }
     }
   });
 }
