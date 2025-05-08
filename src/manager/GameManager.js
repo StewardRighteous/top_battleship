@@ -80,16 +80,20 @@ class GameManager {
 
   isGameOver() {
     if (this.player1turn) {
-      const sunk = this.gameBoard2.isAllSunk();
+      let sunk = this.gameBoard2.isAllSunk();
       if (sunk) {
         this.winner = this.player1.playerName;
+        this.player1turn = false;
+        this.player2turn = false;
       }
       return sunk;
     }
     if (this.player2turn) {
-      const sunk = this.gameBoard1.isAllSunk();
+      let sunk = this.gameBoard1.isAllSunk();
       if (sunk) {
         this.winner = this.player2.playerName;
+        this.player1turn = false;
+        this.player2turn = false;
       }
       return sunk;
     }
@@ -107,6 +111,19 @@ class GameManager {
     this.player1turn = false;
     this.player2turn = false;
     this.winner = undefined;
+  }
+
+  computerMoves() {
+    const options = [];
+    for (let i = 0; i < this.gameBoard1.gameBoard.length; i++) {
+      for (let j = 0; j < this.gameBoard1.gameBoard.length; j++) {
+        if (this.gameBoard1.gameBoard[i][j].length <= 2) {
+          options.push(this.gameBoard1.gameBoard[i][j]);
+        }
+      }
+    }
+    let rand = Math.floor(Math.random() * options.length);
+    this.hitBoard(options[rand]);
   }
 }
 
