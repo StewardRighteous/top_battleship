@@ -9,15 +9,22 @@ import {
   messageInHideBoard,
   passButtonHideBoard,
   cancelButtonHIdeBoard,
+  gameCancelButton,
+  resetButton,
 } from "./UIcomponents";
-import { showPlayer1Board, arrangeBoard } from "./barrel";
+import { showPlayer1Board, arrangeBoard, buildBoards } from "./barrel";
 
 export default function showStartBoard() {
+  gameCancelButton.style.display = "none";
+  resetButton.style.display = "none";
   GameManager.setBoardRandomly();
   showPlayer1Board();
 
   startGameButton.addEventListener("click", () => {
+    GameManager.setTurn();
     UIManager.unsubscribe(showPlayer1Board);
+    UIManager.subscribe(buildBoards);
+    UIManager.notify();
   });
 
   playComputerButton.addEventListener("click", () => {
@@ -56,5 +63,9 @@ export default function showStartBoard() {
 
   arrangeButton.addEventListener("click", () => {
     arrangeBoard("player1");
+  });
+
+  resetButton.addEventListener("click", () => {
+    window.location.reload();
   });
 }

@@ -14,6 +14,7 @@ const hideBoard = document.querySelector(".hide-container");
 const messageInHideBoard = hideBoard.querySelector(".message");
 const passButtonHideBoard = hideBoard.querySelector(".pass-button");
 const cancelButtonHIdeBoard = hideBoard.querySelector(".cancel-button");
+const gameCancelButton = settingsMenu.querySelector(".cancel-button");
 
 export {
   commandText,
@@ -31,5 +32,6 @@ export {
   hideBoard,
   messageInHideBoard,
   passButtonHideBoard,
-  cancelButtonHIdeBoard
+  cancelButtonHIdeBoard,
+  gameCancelButton
 };
